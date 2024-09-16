@@ -1,0 +1,36 @@
+#from util import time_it
+#@time_it
+def trap(self, height):
+    if len(height) < 1 or len(height) > 20000:
+        return -1
+    for i in height:
+        if i < 0 or i > 100000:
+            return -1
+
+    left, right = 0, len(height) -1
+    left_max, right_max = height[left], height[right]
+    water = 0
+
+    while left < right:
+        if left_max < right_max:
+            left += 1
+            left_max = max(left_max, height[left])
+            water += left_max - height[left]
+        else:
+            right -= 1 
+            right_max = max(right_max, height[right])
+            water += right_max - height[right]
+    return water
+
+height_1 = [0,1,0,1,0,1]
+height_1_result = trap(height_1)
+height_2 = [1,0,1]
+height_2_result = trap(height_2)
+height_3 = [500000,40000, 10000000]
+height_3_result = trap(height_3)
+height_4 = []
+height_4_result = trap(height_4)
+print(f"The amount of water stored is {height_1_result}")
+print(f"The amount of water stored is {height_2_result}")
+print(f"The amount of water stored is {height_3_result}")
+print(f"The amount of water stored is {height_4_result}")
